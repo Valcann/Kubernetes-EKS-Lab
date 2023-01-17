@@ -2,11 +2,18 @@ import boto3
 from botocore.exceptions import ClientError
 from fastapi import FastAPI
 import json
+import os
 app = FastAPI()
+
+user = os.getenv('USER')
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": f"Hello {user}"}
+
+@app.get("/health")
+async def root():
+    return {"message": f"UP!"}
 
 @app.get("/generate")
 async def generate_random_password():
@@ -23,7 +30,7 @@ async def generate_random_password():
             RequireEachIncludedType=True
         )
         http_response['statusCode'] = 200
-        http_response['body'] = json.dumps(f"Generated password: {response['RandomPassword']}")
+        http_response['body'] = json.dumps(f"Generated password for {user}: {response['RandomPassword']}")
         return http_response
     except ClientError as e:
         raise Exception("boto3 client error in generate_random_password: " + e.__str__())

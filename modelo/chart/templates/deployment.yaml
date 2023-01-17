@@ -1,0 +1,23 @@
+{{- $deployment := .Values.deployment | default dict }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $deployment.name }}
+  namespace: {{ .Values.project }}-{{ .Values.env }}
+  labels: 
+    {{ - toYaml $deployment.labels | nindent 12 }}
+spec:
+  replicas: {{ $deployment.replicas }}
+  selector:
+    matchLabels:
+      {{ - toYaml $deployment.labels | nindent 12 }}
+  template:
+    metadata:
+      labels:
+        {{ - toYaml $deployment.labels | nindent 12 }}
+    spec:
+      containers:
+      - name: {{ $deployment.containers.name }}
+        image: "{{ $deployment.containers.image.name }}:{{ $deployment.containers.image.tag }}"
+        ports:
+        - containerPort: {{ $deployment.containers.port }}

@@ -1,0 +1,14 @@
+{{- $service := .Values.service | default dict }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $service.name }}
+  namespace: {{ .Values.project }}-{{ .Values.env }}
+spec:
+  type: {{ $service.replicas }}
+  selector:
+    {{ - toYaml .Values.deployment.labels | nindent 12 }}
+  ports:
+    - protocol: TCP
+      port: {{ $service.port }}
+      targetPort: {{ $service.targetPort }}

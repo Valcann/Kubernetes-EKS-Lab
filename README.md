@@ -6,14 +6,14 @@
 
 # Etapas do Lab
 - Clone este repositorio e crie uma pasta para sua App a partir da pasta **modelo**. Incialmente o template serviceAccount.yaml **não** deve ser copiado.
-- Além do modelo base, os seguintes requerimentos devem ser implementados seguindo a estrutura do Helm chart:
+- Além do modelo base, os seguintes requerimentos devem ser implementados nos templates seguindo a estrutura do Helm chart:
   - Deployment
     - variavel de ambiente como nome de usuario
     - readness probe/liveness prob no path /health
     - requests e limits para o container
   - Service
     - tipo ClusterIP
-  - Istio Ingress
+  - Ingress
     - configurar Gateway
     - configurar virtualService
 - Após deploy dos objetos acima, realizar teste na aplicação:

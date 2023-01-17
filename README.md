@@ -19,10 +19,12 @@ Contexto:
 - Após deploy dos objetos acima, realizar teste na aplicação:
   -   Chamada no host/ e host/generate
   -   Check de logs do Pod
-  -   Incialmente a chamada host/generate deve falha por falta de permissão, para corrigir isso devemos criar um role e uma service account.
+  -   Incialmente a chamada host/generate deve falhar por falta de permissão, para corrigir isso devemos criar um role e uma service account.
 - Criar role usando o OIDC do cluster e atrelando a uma Service Account
-  - 
-  - Service Account
-    - Atrelar IAM Role
-    - Atrelar service account ao deployment
-  - Criar role usando o OIDC do cluster como Trusted Relationship e ajustar para uso com Service Account
+  - Criar Service Account usando o **template** na pasta **modelo**
+  - Criar nova Role como Trusted Entity sendo Web Identity
+  -  Selecionar o arn OIDC do cluster e 'sts' como Audience
+  -  Atrelar permissões necessarias para Secret Manager e criar role
+  -  Editar o Trust Relationship da Role para apontar para service account.
+  - Adicionar referencia para Service Account no Deployment
+- Realizer nova validação da aplicação

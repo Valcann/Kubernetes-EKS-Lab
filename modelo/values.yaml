@@ -1,6 +1,6 @@
 project: "k8s"
 env: "lab"
-
+account: ""
 deployment:
   name: "fastapi-demo"
   labels:
@@ -20,7 +20,7 @@ service:
   targetPort: 8000
   
 serviceAccount:
-  name:
+  name: "fastapi-demo"
 
 ingress:
   hosts: portela.testmyapi.xyz

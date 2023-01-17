@@ -23,8 +23,9 @@
 - Criar role usando o OIDC do cluster e atrelando a uma Service Account
   - Criar Service Account usando o **template** na pasta **modelo**
   - Criar nova Role como Trusted Entity sendo Web Identity
-  -  Selecionar o arn OIDC do cluster e 'sts' como Audience
+  -  Selecionar o arn OIDC do cluster e 'sts' como Audience durante
   -  Atrelar permissões necessarias para Secret Manager e criar role
   -  Editar o Trust Relationship da Role para apontar para service account.
+  -  Desconmentar annotation no template de Service Account e ajustar nome da role previamente criada
   - Adicionar referencia para Service Account no Deployment
-- Realizer nova validação da aplicação
+- Realizer push das alterações, sincronizar Argo e Validar aplicação

@@ -7,7 +7,7 @@ metadata:
 spec:
   type: {{ $service.type }}
   selector:
-    {{ - toYaml .Values.deployment.labels | nindent 12 }}
+    app: fastapi-demo
   ports:
     - protocol: TCP
       port: {{ $service.port }}

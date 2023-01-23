@@ -5,16 +5,16 @@ metadata:
   name: {{ $deployment.name }}
   namespace: {{ .Values.project }}-{{ .Values.env }}
   labels: 
-    {{ - toYaml $deployment.labels | nindent 12 }}
+    app: fastapi-demo
 spec:
   replicas: {{ $deployment.replicas }}
   selector:
     matchLabels:
-      {{ - toYaml $deployment.labels | nindent 12 }}
+      app: fastapi-demo}
   template:
     metadata:
       labels:
-        {{ - toYaml $deployment.labels | nindent 12 }}
+        app: fastapi-demo
     spec:
       containers:
       - name: {{ $deployment.containers.name }}

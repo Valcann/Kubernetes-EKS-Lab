@@ -10,7 +10,7 @@ spec:
   replicas: {{ $deployment.replicas }}
   selector:
     matchLabels:
-      app: fastapi-demo}
+      app: fastapi-demo
   template:
     metadata:
       labels:

@@ -5,7 +5,7 @@ metadata:
   name: {{ $service.name }}
   namespace: {{ .Values.project }}-{{ .Values.env }}
 spec:
-  type: {{ $service.replicas }}
+  type: {{ $service.type }}
   selector:
     {{ - toYaml .Values.deployment.labels | nindent 12 }}
   ports:

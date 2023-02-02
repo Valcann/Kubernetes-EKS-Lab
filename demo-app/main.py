@@ -18,7 +18,7 @@ async def root():
 @app.get("/generate")
 async def generate_random_password():
     http_response = {}
-    client = boto3.client('secretsmanager')
+    client = boto3.client('secretsmanager', region_name="us-east-1")
     try:
         response = client.get_random_password(PasswordLength=18,
             ExcludeCharacters="",

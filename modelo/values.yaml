@@ -10,7 +10,7 @@ deployment:
     name: fastapi-demo
     image:
       name: 651644924182.dkr.ecr.us-east-1.amazonaws.com/fastapi-demo
-      tag: 0.1-arm@sha256:ee161add82e5547742b2dab02cb78a9d897843ebc8fdcb4039de6babd40777f8
+      tag: 0.2-arm@sha256:2839e8d8193a8b0d98b59e9a805c57420e1ca837da88fc662c68180b0a4d5f1a
     port: 8000
 
 service:

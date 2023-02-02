@@ -5,7 +5,7 @@
 
 # Etapas do Lab
 - Clone este repositorio e crie uma pasta para sua App a partir da pasta **modelo**. Incialmente o template serviceAccount.yaml **não** deve ser copiado.
-- Criar arquivo de Application do ArgoCD seguindo o modelo do **portela-app.yaml**
+- Criar arquivo de Application do ArgoCD seguindo o modelo do **portela-app.yaml** no diretorio argocd-apps.
 - Além do modelo base, os seguintes requerimentos devem ser implementados nos templates seguindo a estrutura do Helm chart:
   - Deployment
     - variavel de ambiente como nome de usuario

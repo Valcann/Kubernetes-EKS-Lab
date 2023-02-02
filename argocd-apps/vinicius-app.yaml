@@ -5,14 +5,14 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: k8s-lab
+    namespace: k8s-vinicius
     server: https://kubernetes.default.svc
   project: default
   source:
     helm:
       valueFiles:
       - values.yaml
-    path: modelo
+    path: vinicius
     repoURL: https://github.com/Valcann/Kubernetes-EKS-Lab.git
     targetRevision: HEAD
   syncPolicy:

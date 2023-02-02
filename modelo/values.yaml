@@ -21,19 +21,3 @@ service:
   
 serviceAccount:
   name: fastapi-demo
-
-ingress:
-  gateway: 
-    name: fastapi-demo
-    servers:
-      port:
-        number: 80
-        name: http
-        protocol: HTTP
-
-  virtualService:
-    name: fastapi-demo
-    route:
-      destination:
-        host: fastapi-demo.k8s-lab.svc.cluster.local
-

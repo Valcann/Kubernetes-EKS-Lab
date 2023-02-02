@@ -26,5 +26,7 @@
   -  Desconmentar annotation no template de Service Account e ajustar nome da role previamente criada
   - Adicionar referencia para Service Account no Deployment
 - Realizer push das alterações, sincronizar Argo e Validar aplicação 
-`aws eks update-kubeconfig --name devops-labs --region us-east-1 --role-arn arn:aws:iam::651644924182:role/eks_access
+```
+aws eks update-kubeconfig --name devops-labs --region us-east-1 --role-arn arn:aws:iam::651644924182:role/eks_access
 kubectl port-forward -n {NAMESPACE} {SERVICE} 8000:80
+```

@@ -24,7 +24,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /health
-            port: 80
+            port: 8000
           successThreshold: 3
         resources:
           requests:

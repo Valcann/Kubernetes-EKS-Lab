@@ -20,4 +20,4 @@ service:
   targetPort: 8000
   
 serviceAccount:
-  name: jamorim
+  name: fastapi-demo

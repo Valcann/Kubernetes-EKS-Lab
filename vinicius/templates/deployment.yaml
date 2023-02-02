@@ -19,13 +19,6 @@ spec:
       containers:
       - name: {{ $deployment.containers.name }}
         image: "{{ $deployment.containers.image.name }}:{{ $deployment.containers.image.tag }}"
-        ports:
-        - containerPort: {{ $deployment.containers.port }}
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8000
-          successThreshold: 3
         resources:
           requests:
             memory: "256Mi"
@@ -33,6 +26,19 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
+        
+        ports:
+        - containerPort: {{ $deployment.containers.port }}
         env:
-        - name: USER
-          value: "jamorim"
+          - name: USER
+            value: ViniciusSiqueira
+      
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: 8000
+
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 8000

@@ -23,7 +23,6 @@ serviceAccount:
   name: fastapi-demo
 
 ingress:
-  hosts: portela.testmyapi.xyz
   gateway: 
     name: fastapi-demo
     servers:

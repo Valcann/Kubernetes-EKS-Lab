@@ -16,8 +16,12 @@ spec:
       labels:
         app: fastapi-demo
     spec:
+      serviceAccountName: fastapi-demo
       containers:
       - name: {{ $deployment.containers.name }}
         image: "{{ $deployment.containers.image.name }}:{{ $deployment.containers.image.tag }}"
         ports:
         - containerPort: {{ $deployment.containers.port }}
+        env:
+        - name: USER
+          value: portela

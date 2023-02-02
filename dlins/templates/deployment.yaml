@@ -20,4 +20,7 @@ spec:
       - name: {{ $deployment.containers.name }}
         image: "{{ $deployment.containers.image.name }}:{{ $deployment.containers.image.tag }}"
         ports:
-        - containerPort: {{ $deployment.containers.port }}
+        - containerPort: {{ $deployment.containers.port }}git
+        env:
+        - name: USER
+          value: "Diego Lins"

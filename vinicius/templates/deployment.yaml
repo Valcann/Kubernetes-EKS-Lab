@@ -38,7 +38,7 @@ spec:
           path: /health
           port: 8000
 
-      readnessProbe:
+      readinessProbe:
         httpGet:
           path: /health
           port: 8000

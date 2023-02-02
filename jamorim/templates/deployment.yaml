@@ -1,0 +1,38 @@
+{{- $deployment := .Values.deployment | default dict }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $deployment.name }}
+  namespace: {{ .Values.project }}-{{ .Values.env }}
+  labels: 
+    app: fastapi-demo
+spec:
+  replicas: {{ $deployment.replicas }}
+  selector:
+    matchLabels:
+      app: fastapi-demo
+  template:
+    metadata:
+      labels:
+        app: fastapi-demo
+    spec:
+      containers:
+      - name: {{ $deployment.containers.name }}
+        image: "{{ $deployment.containers.image.name }}:{{ $deployment.containers.image.tag }}"
+        ports:
+        - containerPort: {{ $deployment.containers.port }}
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          successThreshold: 3
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        env:
+        - name: USER
+          value: "jamorim"

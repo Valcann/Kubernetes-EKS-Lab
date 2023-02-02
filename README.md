@@ -25,4 +25,4 @@
   -  Editar o Trust Relationship da Role para apontar para service account.
   -  Desconmentar annotation no template de Service Account e ajustar nome da role previamente criada
   - Adicionar referencia para Service Account no Deployment
-- Realizer push das alterações, sincronizar Argo e Validar aplicação
+- Realizer push das alterações, sincronizar Argo e Validar aplicação 

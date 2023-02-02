@@ -6,6 +6,7 @@ import os
 app = FastAPI()
 
 user = os.getenv('USER')
+role_arn = os.getenv("ROLE_ARN")
 
 @app.get("/")
 async def root():
@@ -17,8 +18,19 @@ async def root():
 
 @app.get("/generate")
 async def generate_random_password():
+
+
+    client = boto3.client('sts')
+    response = client.assume_role(
+        RoleArn=role_arn,
+        RoleSessionName='boto3-session')
+
     http_response = {}
-    client = boto3.client('secretsmanager', region_name="us-east-1")
+    client = boto3.client('secretsmanager', 
+                        region_name="us-east-1", 
+                        aws_access_key_id=response['Credentials']['AccessKeyId'],
+                        aws_secret_access_key=response['Credentials']['SecretAccessKey'],
+                        aws_session_token=response['Credentials']['SessionToken'])
     try:
         response = client.get_random_password(PasswordLength=18,
             ExcludeCharacters="",

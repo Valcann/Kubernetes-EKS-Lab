@@ -16,7 +16,7 @@ spec:
       labels:
         app: fastapi-demo
     spec:
-      serviceAccountName: fastapi-demo
+      serviceAccountName: jamorim
       containers:
       - name: {{ $deployment.containers.name }}
         image: "{{ $deployment.containers.image.name }}:{{ $deployment.containers.image.tag }}"

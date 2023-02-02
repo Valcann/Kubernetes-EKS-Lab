@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dlins
+  namespace: argocd
+spec:
+  destination:
+    namespace: k8s-dlins
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - values.yaml
+    path: dlins
+    repoURL: https://github.com/Valcann/Kubernetes-EKS-Lab.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

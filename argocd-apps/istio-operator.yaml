@@ -12,6 +12,8 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: istio-system
+  syncOptions:
+    CreateNamespace: true
   syncPolicy:
     automated:
       selfHeal: true

@@ -19,6 +19,8 @@ spec:
           userKey: admin-user
           passwordKey: admin-password
   syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true

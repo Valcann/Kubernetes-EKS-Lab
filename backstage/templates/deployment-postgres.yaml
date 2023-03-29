@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
-  namespace: backstage
+  namespace: {{ .Values.project }}-{{ .Values.env }}
 spec:
   replicas: 1
   selector:

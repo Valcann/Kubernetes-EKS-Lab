@@ -1,0 +1,23 @@
+project: backstage
+env: lab
+account: "651644924182"
+deployment:
+  name: backstage-app
+  labels:
+    app: backstage-app
+  replicas: 1
+  containers:
+    name: backstage-app
+    image:
+      name: 651644924182.dkr.ecr.us-east-1.amazonaws.com/backstage
+      tag: v.0.1@sha256:f1eee96f0f33c0762b73eccdd95bedda3497872b876a01c16077658a0f2ed32f
+    port: 7007
+
+service:
+  name: backstage-app
+  type: ClusterIP
+  port: 80
+  targetPort: 7007
+  
+serviceAccount:
+  name: backstage-app

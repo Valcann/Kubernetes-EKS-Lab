@@ -1,0 +1,29 @@
+{{- $deployment := .Values.deployment | default dict }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $deployment.name }}
+  namespace: {{ .Values.project }}-{{ .Values.env }}
+  labels: 
+    app: backstage-app
+spec:
+  replicas: {{ $deployment.replicas }}
+  selector:
+    matchLabels:
+      app: backstage-app
+  template:
+    metadata:
+      labels:
+        app: backstage-app
+    spec:
+      serviceAccountName: backstage-app
+      containers:
+      - name: {{ $deployment.containers.name }}
+        image: "{{ $deployment.containers.image.name }}:{{ $deployment.containers.image.tag }}"
+        ports:
+        - containerPort: {{ $deployment.containers.port }}
+        envFrom:
+          - secretRef:
+              name: postgres-secrets
+          - secretRef:
+              name: backstage-secrets

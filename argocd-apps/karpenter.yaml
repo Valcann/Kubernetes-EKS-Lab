@@ -7,7 +7,7 @@ spec:
   project: default #every application belongs to a single project
   source:
     repoURL: https://github.com/Valcann/Kubernetes-EKS-Lab.git
-    targetRevision: HEAD
+    targetRevision: demo-karpenter
     path: karpenter
   destination:
     server: https://kubernetes.default.svc

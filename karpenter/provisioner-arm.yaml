@@ -16,23 +16,23 @@ spec:
   labels:
     provisioner: demo-arm
   requirements:
-    - key: "karpenter.k8s.aws/instance-family"
-      operator: In
-      values: ["c6a","c5a","m6a","m5a"]
-    - key: karpenter.k8s.aws/instance-size
-      operator: In
-      values: ["large","xlarge","2xlarge"]
-    - key: "karpenter.k8s.aws/instance-hypervisor"
-      operator: In
-      values: ["nitro"]
-    - key: "topology.kubernetes.io/zone"
-      operator: In
-      values: ["us-east-1a","us-east-1b"]
-    - key: "kubernetes.io/arch"
-      operator: In
-      values: ["arm64"]
-    - key: "karpenter.sh/capacity-type" # If not included, the webhook for the AWS cloud provider will default to on-demand
-      operator: In
-      values: ["spot", "on-demand"]
-    providerRef:
-      name: karpenter-provider
+  - key: "karpenter.k8s.aws/instance-family"
+    operator: In
+    values: ["c6a","c5a","m6a","m5a"]
+  - key: karpenter.k8s.aws/instance-size
+    operator: In
+    values: ["large","xlarge","2xlarge"]
+  - key: "karpenter.k8s.aws/instance-hypervisor"
+    operator: In
+    values: ["nitro"]
+  - key: "topology.kubernetes.io/zone"
+    operator: In
+    values: ["us-east-1a","us-east-1b"]
+  - key: "kubernetes.io/arch"
+    operator: In
+    values: ["arm64"]
+  - key: "karpenter.sh/capacity-type" # If not included, the webhook for the AWS cloud provider will default to on-demand
+    operator: In
+    values: ["spot", "on-demand"]
+  providerRef:
+    name: karpenter-provider

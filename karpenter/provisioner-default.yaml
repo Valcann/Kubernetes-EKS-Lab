@@ -1,0 +1,61 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: default
+  namespace: kube-system
+spec:
+  # consolidation:
+  #   enabled: true
+  ttlSecondsAfterEmpty: 30 # scale down nodes after 60 seconds without workloads (excluding daemons)
+  ttlSecondsUntilExpired: 259200 # expire nodes after 3 days (in seconds) = 3 * 60 * 60 * 24
+  limits:
+    resources:
+      cpu: 100 # limit to 100 CPU cores the maximum cluster usage
+  requirements:
+  - key: "karpenter.k8s.aws/instance-family"
+    operator: In
+    values: ["c6a","c5a","m6a","m5a"]
+  - key: karpenter.k8s.aws/instance-size
+    operator: In
+    values: ["large","xlarge"]
+  - key: "karpenter.k8s.aws/instance-hypervisor"
+    operator: In
+    values: ["nitro"]
+  - key: "topology.kubernetes.io/zone"
+    operator: In
+    values: ["us-east-1a","us-east-1b"]
+  - key: "kubernetes.io/arch"
+    operator: In
+    values: ["amd64"]
+  - key: "karpenter.sh/capacity-type" # If not included, the webhook for the AWS cloud provider will default to on-demand
+    operator: In
+    values: ["spot", "on-demand"]
+  providerRef:
+    name: karpenter-provider
+---
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: karpenter-provider
+  namespace: karpenter
+spec:
+  subnetSelector:
+    karpenter.sh/discovery: "demo-karpenter"
+  securityGroupSelector:
+    karpenter.sh/discovery: "demo-karpenter"
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 50Gi
+        volumeType: gp3
+        iops: 3000
+        deleteOnTermination: true
+        throughput: 125
+  tags:
+    Name: demo-karpenter
+    Environment: dev
+    Client: demo
+    Project: demo
+    Squad: Devops
+    Product: demo
+    CreatedBy: Valcann

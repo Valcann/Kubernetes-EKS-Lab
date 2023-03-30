@@ -1,0 +1,38 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: demo-arm
+  namespace: karpenter
+spec:
+  ttlSecondsAfterEmpty: 30 # scale down nodes after 60 seconds without workloads (excluding daemons)
+  ttlSecondsUntilExpired: 259200 # expire nodes after 3 days (in seconds) = 3 * 60 * 60 * 24
+  limits:
+    resources:
+      cpu: 100 # limit to 100 CPU cores the maximum cluster usage
+  taints:
+    - key: provisioner
+      value: demo-arm
+      effect: NoSchedule
+  labels:
+    provisioner: demo-arm
+requirements:
+  - key: "karpenter.k8s.aws/instance-family"
+    operator: In
+    values: ["c6a","c5a","m6a","m5a"]
+  - key: karpenter.k8s.aws/instance-size
+    operator: In
+    values: ["large","xlarge","2xlarge"]
+  - key: "karpenter.k8s.aws/instance-hypervisor"
+    operator: In
+    values: ["nitro"]
+  - key: "topology.kubernetes.io/zone"
+    operator: In
+    values: ["us-east-1a","us-east-1b"]
+  - key: "kubernetes.io/arch"
+    operator: In
+    values: ["arm64"]
+  - key: "karpenter.sh/capacity-type" # If not included, the webhook for the AWS cloud provider will default to on-demand
+    operator: In
+    values: ["spot", "on-demand"]
+  providerRef:
+    name: karpenter-provider

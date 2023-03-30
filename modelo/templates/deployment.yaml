@@ -6,6 +6,7 @@ metadata:
   namespace: {{ .Values.project }}-{{ .Values.env }}
   labels: 
     app: fastapi-demo
+    provisioner: demo-arm
 spec:
   replicas: {{ $deployment.replicas }}
   selector:
@@ -15,7 +16,10 @@ spec:
     metadata:
       labels:
         app: fastapi-demo
+        provisioner: demo-arm
     spec:
+      nodeSelector:
+        provisioner: demo-arm
       serviceAccountName: fastapi-demo
       containers:
       - name: {{ $deployment.containers.name }}
@@ -25,3 +29,8 @@ spec:
         env:
         - name: USER
           value: portela
+      tolerations:
+      - key: "provisioner"
+        operator: "Equal"
+        value: "demo-arm"
+        effect: "NoSchedule"

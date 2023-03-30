@@ -11,7 +11,7 @@ spec:
     path: karpenter
   destination:
     server: https://kubernetes.default.svc
-    namespace: istio-system
+    namespace: karpenter
   syncPolicy:
     syncOptions:
     - CreateNamespace=true

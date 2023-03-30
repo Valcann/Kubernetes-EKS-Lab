@@ -18,6 +18,10 @@ spec:
           existingSecret: "grafana-access"
           userKey: admin-user
           passwordKey: admin-password
+        persistence:
+          type: pvc
+          enabled: true
+          storageClassName: standard
   syncPolicy:
     syncOptions:
     - CreateNamespace=true

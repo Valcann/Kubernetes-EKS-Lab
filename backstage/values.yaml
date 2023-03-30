@@ -5,7 +5,7 @@ deployment:
   name: backstage-app
   labels:
     app: backstage-app
-  replicas: 1
+  replicas: 0
   containers:
     name: backstage-app
     image:

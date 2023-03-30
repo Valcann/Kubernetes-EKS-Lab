@@ -10,7 +10,7 @@ deployment:
     name: backstage-app
     image:
       name: 651644924182.dkr.ecr.us-east-1.amazonaws.com/backstage
-      tag: v.0.1@sha256:f1eee96f0f33c0762b73eccdd95bedda3497872b876a01c16077658a0f2ed32f
+      tag: v.0.2@sha256:8047c32f878be9ed70021a60958f10139a1be3141a141d6854bf02235d821993
     port: 7007
 
 service:

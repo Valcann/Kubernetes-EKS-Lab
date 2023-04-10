@@ -1,0 +1,77 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loki
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: loki
+      component: loki
+      tier: logging
+  template:
+    metadata:
+      labels:
+        app: loki
+        component: loki
+        tier: logging
+    spec:
+      automountServiceAccountToken: false
+      # runtimeClassName: kata
+
+      securityContext:
+        runAsUser: 10001
+        fsGroup: 10001
+        runAsGroup: 10001
+        runAsNonRoot: true
+
+      containers:
+        - name: loki
+          # 2.5.0 as of 2022/04/11
+          image: grafana/loki@sha256:c4f9965d93379a7a69b4d21b07e8544d5005375abeff3727ecd266e527bab9d3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3100
+            - containerPort: 9096
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 2Gi
+          # Probes
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 3100
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: 3100
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+
+          volumeMounts:
+            - name: config
+              mountPath: /etc/loki/local-config.yaml
+              subPath: local-config.yaml
+            - name: data
+              mountPath: /data
+
+      volumes:
+        - name: config
+          configMap:
+            name: loki
+        - name: data
+          persistentVolumeClaim:
+            claimName: loki

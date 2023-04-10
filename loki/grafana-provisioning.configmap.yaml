@@ -1,9 +1,0 @@
-      - name: cluster-loki
-        uid: "_cluster-loki"
-        type: loki
-        access: proxy
-        version: 1
-        orgId: 1
-        editable: true
-        is_default: true
-        url: "http://loki.logging.svc.cluster.local:3100"

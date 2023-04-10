@@ -22,11 +22,11 @@ spec:
         image: "{{ $deployment.containers.image.name }}:{{ $deployment.containers.image.tag }}"
         resources:
           requests:
-            memory: "64Mi"
+            memory: "30Mi"
             cpu: "100m"
           limits:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: "256Mi"
+            cpu: "300m"
         
         ports:
         - containerPort: {{ $deployment.containers.port }}
@@ -37,9 +37,9 @@ spec:
         livenessProbe:
           httpGet:
             path: /health
-            port: 8001
+            port: 8000
 
         readinessProbe:
           httpGet:
             path: /health
-            port: 8001
+            port: 8000

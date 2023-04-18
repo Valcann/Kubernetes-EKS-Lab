@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu
+  labels:
+    app: ubuntu
+    provisioner: demo
+spec:
+  serviceAccountName: default
+  containers:
+  - image: 651644924182.dkr.ecr.us-east-1.amazonaws.com/fastapi-demo:python-k8s@sha256:caba7965be4ec5830721a95a108c4c8fd5f42b954f30a253ea3022469f2f12bf
+    imagePullPolicy: IfNotPresent
+    name: ubuntu
+  restartPolicy: Always

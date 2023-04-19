@@ -48,7 +48,6 @@ data:
     # If you would like to disable reporting, uncomment the following lines:
     analytics:
       reporting_enabled: false
-​
 #Add Storage Class for Persistent Volume Claim
 --- 
 apiVersion: storage.k8s.io/v1
@@ -58,7 +57,6 @@ metadata:
 provisioner: ebs.csi.aws.com
 #reclaimPolicy: Retain
 volumeBindingMode: WaitForFirstConsumer
-​
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -97,13 +95,11 @@ spec:
     spec:
       automountServiceAccountToken: false
       # runtimeClassName: kata
-​
       securityContext:
         runAsUser: 10001
         fsGroup: 10001
         runAsGroup: 10001
         runAsNonRoot: true
-​
       containers:
         - name: loki
           # 2.5.0 as of 2022/04/11
@@ -135,14 +131,12 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 5
-​
           volumeMounts:
             - name: config
               mountPath: /etc/loki/local-config.yaml
               subPath: local-config.yaml
             - name: data
               mountPath: /data
-​
       volumes:
         - name: config
           configMap:
@@ -150,7 +144,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: loki
-​
 ---
 apiVersion: v1
 kind: Service
